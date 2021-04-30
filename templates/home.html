@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container" id="app">
+
+        <div class="columns">
+            <div class="column m-6">
+                <h2 class="block has-text-centered is-primary is-size-2 has-text-weight-bold">Hello, Taylor</h2>
+                <br>
+                <form method="POST" id="form">
+                    {% csrf_token %}
+                    <div class="control">
+                        <input class="input is-focused" type="text" name="post_data" id="dataToSave" placeholder="Enter some data..." required>
+                      </div>                  
+       
+                      <div class="control mt-2">
+                        <button class="button is-primary" id="submit-btn">Submit</button>
+                      </div>
+                </form>
+
+                <div class="break">
+                    <a href="{% url 'main:listings_home' %}">Check out our listings</a>
+                </div>
+
+                <div class="break">
+                    <a href="{% url 'main:barry_home' %}">Barry</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Make data -->
+        <div class="columns has-text-centered">
+            <div class="column">
+                <button v-if="!dataLoading"  @click='fetchSignUps' class="button is-primary">Make Quick Cash</button>
+                <button v-if="dataLoading" class="button is-primary is-loading">Loading</button>
+                <h3 class="is-size-4 has-text-weight-semibold">Here are some opportunities to make a quick buck... 💲</h3>
+                <div class="card m-4" v-for="(opp, index) in opportunities" :key="index">
+                    <div class="card-content">
+                        <div class="content">[[ opp ]]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <img style="width: 25; height: 25;" src="{% static 'images/financial-graph.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            delimiters: ["[[", "]]"],
+            data: {
+                opportunities: [],
+                datePosted: [],
+                dataLoading: false
+            },
+
+            methods: {
+                async fetchSignUps() {
+                    // Change the state to loading the data...
+                    this.dataLoading = true
+
+                    await fetch("{% url 'main:fetch_signups' %}", {
+                        method: 'GET',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                    })
+                    .then(res => {
+                        return res.json()
+                    })
+                    .then(data => {
+                        console.log(data)
+                        this.opportunities = data.subData
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
+                    // Set the state back to not loading.
+                    this.dataLoading = false
+                }
+            },
+
+        });
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+        }
+        
+        return cookieValue;
+        }
+
+        // Process the form
+        document.getElementById('submit-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Get the data from the form input field
+            let inputData = document.getElementById('dataToSave').value
+
+            const csrftoken = getCookie('csrftoken')
+
+            fetch("{% url 'main:home' %}", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                
+                body: JSON.stringify({'post_data': inputData}),
+            })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                // Print out the data
+                console.log(data);
+                
+                // Reset the form
+                document.getElementById('dataToSave').value = ""
+            })
+            .catch(issue => {
+                console.log(issue);
+            })
+        })
+
+    </script>
+
+{% endblock content %}

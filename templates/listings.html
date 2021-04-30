@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="columns">
+        <div class="column has-text-centered">
+            <h2>Here's our list of cozy cottages with beautiful views 🌞</h2>
+
+            {% for listing in current_listings %}
+                <div class="break">
+                    <a href="{{ listing.get_absolute_url }}">{{ listing.title }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}

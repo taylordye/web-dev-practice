@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <title>All the best of Barry McCockiner</title>
+</head>
+<body class="bg-gray-200">
+
+    <div class="bg-gray-700 p-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center text-2xl font-bold">
+            <img src="{% static 'images/barry.jpg' %}" width="50" class="rounded-lg hover:-translate-y-0.5 transform" alt="">
+            <a href="{% url 'main:home' %}" class="text-gray-300 p-4 hover:text-gray-100 hover:-translate-y-0.5 transform">Barry McCockiner</a>
+        </div>
+        
+        <!-- Rightside of nav -->
+        <div class="hidden md:block text-gray-200 text-md font-semibold">
+            <a href="" class="md:mr-5 inline-block hover:text-white">Tweets</a>
+            <a href="" class="md:mr-5 inline-block py-2 px-4 bg-indigo-500 rounded hover:text-white hover:bg-indigo-400 text-gray-100 transition ease-in duration-135">About</a>
+        </div>
+    </div>
+
+    <!-- Hero section -->
+    <div class="md:flex justify-between py-20 px-10 text-gray-900">
+
+        <div class="sm:justify-center md:w-1/2 mb-10 md:mb-0 lg:px-48">
+            <!-- left column -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
+                The Unofficial Fan Page for <span class="text-indigo-500 font-bold">Barry McCockiner</span>
+            </h1>
+            <em class="">(bare ee ma cock in er)</em>
+            <h4 class="text-2xl font-semibold mb-5">Track the best tweets and latest Twitter handles as he takes over the sports world</h4>
+
+            <a href="" class="inline-block py-3 px-6 mr-2 bg-indigo-500 rounded hover:text-white text-gray-100 hover:bg-indigo-400">Best Tweets</a>
+            <a href="" class="inline-block py-3 px-6 bg-gray-400 rounded hover:text-white text-gray-100">Learn More</a>
+        </div>
+
+        <!-- right hero subsection -->
+        <div class="md:w-1/2">
+            <a target="_blank" href="https://twitter.com/UltraWeedHater?s=20">
+                <img class="rounded-xl shadow-2xl hover:-translate-y-0.5 hover:-translate-x-0.5 transform bg-indigo-900" src="{% static 'images/barry-twitter.jpg' %}" alt="Barry McCockiner trolls Adam Shefter about Mac Jones' DUI." srcset="">
+                <p class="mt-4 text-gray-900 font-semibold">Current Twitter <img class="inline-block ml-2" height="25" width="25" src="{% static 'images/twitter.svg' %}" alt=""></p>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Features and Featured Tweets -->
+    <div class="md:mt-48 m-8 flex justify-center text-3xl font-bold text-gray-900">
+        Unmatched Analysis, Tweets, & Insight
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-12 py-20 px-5 bg-gray-700">
+        
+        <!-- Cards -->
+        <div class="bg-white rounded-xl shadow-lg">
+            <img class="rounded-xl overflow-hidden w-full object-cover h-32 sm:h-48" width="200" height="200" src="{% static 'images/barry-tweet-04.25.2021.jpg' %}" alt="" srcset="">
+            <div class="m-2">
+                <span class="p-2 text-lg font-bold">Unmatched NFL Draft Analysis</span>
+                <span class="p-2 text-lg block text-gray-500">
+                    In light of the upcoming 2021 NFL Draft...
+                </span>
+                <span class="pl-2 text-sm block text-gray-400">
+                    4/20/2021
+                </span>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="bg-white rounded-xl shadow-lg">
+            <img class="rounded-xl overflow-hidden w-full object-cover h-32 sm:h-48" width="200" height="200" src="{% static 'images/barry-tweet-04.25.2021.jpg' %}" alt="" srcset="">
+            <div class="m-2">
+                <span class="p-2 text-lg font-bold">Unmatched NFL Draft Analysis</span>
+                <span class="p-2 text-lg block text-gray-500">
+                    In light of the upcoming 2021 NFL Draft...
+                </span>
+                <span class="pl-2 text-sm block text-gray-400">
+                    4/20/2021
+                </span>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="bg-white rounded-xl shadow-lg">
+            <img class="rounded-xl overflow-hidden w-full object-cover h-32 sm:h-48" width="200" height="200" src="{% static 'images/barry-tweet-04.25.2021.jpg' %}" alt="" srcset="">
+            <div class="m-2">
+                <span class="p-2 text-lg font-bold">Unmatched NFL Draft Analysis</span>
+                <span class="p-2 text-lg block text-gray-500">
+                    In light of the upcoming 2021 NFL Draft...
+                </span>
+                <span class="pl-2 text-sm block text-gray-400">
+                    4/20/2021
+                </span>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="bg-white rounded-xl shadow-lg">
+            <img class="rounded-xl overflow-hidden w-full object-cover h-32 sm:h-48" width="200" height="200" src="{% static 'images/barry-tweet-04.25.2021.jpg' %}" alt="" srcset="">
+            <div class="m-2">
+                <span class="p-2 text-lg font-bold">Unmatched NFL Draft Analysis</span>
+                <span class="p-2 text-lg block text-gray-500">
+                    In light of the upcoming 2021 NFL Draft...
+                </span>
+                <span class="pl-2 text-sm block text-gray-400">
+                    4/20/2021
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

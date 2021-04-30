@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="columns">
+        <div class="column m-4 p-6">
+            <div class="break has-text-centered m-4">
+                {{ listing.title }}
+            </div>
+
+            <div class="break">
+                {{ listing.body }}
+            </div>
+
+            <div class="break m-4">
+                {{ listing.pk }}
+            </div>
+
+            <a href="https://www.thelodgeatgeneva.com/cottages" target="_blank" class="button is-primary mt-2" id="leadButton">Book it!</a>
+        </div>
+    </div>
+
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+        
+        return cookieValue;
+        }
+
+        // Get the listing ID
+        let listingId = "{{ listing.pk }}"
+
+        const csrfToken = getCookie('csrftoken')
+
+        // Send an event to the server that a click on the listing occurred
+        document.getElementById('leadButton').addEventListener('click', (e) => {
+            // Send a post request to the server
+            fetch("{% url 'main:listing_detail' listing.pk %}", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+
+                body: JSON.stringify({"event": "click"})
+            })
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log(data);
+            })
+        })
+    </script>
+
+{% endblock content %}
