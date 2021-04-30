@@ -1,5 +1,11 @@
 module.exports = {
-  purge: [],
+  purge: {
+    content: [
+      '/templates/barry_home.html'
+    ],
+    
+    enabled: true,
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
